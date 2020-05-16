@@ -1,0 +1,114 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+\usepackage{float}
+\usepackage{amssymb,amsfonts,amsmath}
+\usepackage{bbm}
+\usepackage[ruled]{algorithm2e}
+\usepackage{bbold}
+\usepackage{helvet}
+\usepackage{sectsty}
+\usepackage{physics}
+%\usepackage{stix}
+
+%%% PAGE DIMENSIONS
+\usepackage[margin=0.75in]{geometry}
+\geometry{letterpaper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+\renewcommand{\baselinestretch}{1.00}
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig}
+\usepackage{amsmath} % make it possible to include more than one captioned figure/table in a single float
+
+
+
+%%% Variables used in the model
+
+\newcommand{\gs}{N} %Group size
+\newcommand{\Ng}{G} %Number of groups in the population
+\newcommand{\pd}{d} %migration rate
+\newcommand{\ig}{x} %Investment in the public good
+\newcommand{\Pg}{X} %Total public good produced in a group
+\newcommand{\Ps}{P} %Probability of group survival
+\newcommand{\cm}{t} %Competitiveness modifier function
+
+
+
+\newcommand{\no}{K} %Number of offspring produced per individual
+\newcommand{\pc}{\mu} %probability to compete for a reproductive spot in an empty group
+\newcommand{\aF}{W} %Absolute fitness
+\newcommand{\rF}{w} %relative fitness
+
+
+\title{\textsc{The biological origins of group attachment and social exclusion: A kin-selection model}} %Feel free to change the title if you have better ideas
+\author{Alberto Micheletti, Saurabh Pant, Slimane Dridi}
+%\date{}
+
+\begin{document}
+\maketitle
+
+%\hrule
+
+
+\section{Goals of the model (future intro)}
+
+Humans have a universal tendency to form and associate themselves with groups. Strong group attachment can bring benefits to the group (e.g., better development outcomes) but can also foster inter-group hostility (e.g., ethnic conflict). Instead of studying the consequences of group attachment, we look at the prior questions of why these groups form in the first place, and how do these groups initially structure themselves. To study these questions, we develop an evolutionary game theoretic model that studies the evolutionary origins of group attachment.
+
+\section{Model}
+
+We consider a model that is based on Gavrilets' (2014) study of the evolution of collective action. Namely we have a population of $\Ng$ groups (we assume $\Ng$ to be very large) each consisting of $\gs$ haploid asexual individuals. We assume the following life cycle.
+\begin{enumerate}[(1)]
+   % \item At the beginning of the life cycle, each individual adult produces a large number $\no$ of offspring that mature to become juveniles. In the next line say juvenile individuals (hereafter 'individuals')
+    \item In all groups, individuals disperse to another randomly chosen group with probability $\pd$.
+    \item Within each group, individuals contribute to a local public good, whose benefits $\Pg$ are shared between group members. With probability $\Ps(\Pg)$ (which is increasing in $\Pg$), the group dies and its members along with it, so that all corresponding $\gs$ breeding spots are left empty.
+    \item All surviving adults produce a fixed number $\no$ of juveniles, and die (non-overlapping generations).
+    \item There is density-dependent competition for breeding spots such that juveniles born from parents with higher payoffs in the public good game (stage 2) have a larger probability to survive to adulthood. Competition can either occur within the group where the public-good game took place with probability $1-\pc$, or in a group that was left empty by group death with the complementary probability $\pc$.
+\end{enumerate}
+
+
+
+Owing to the defined life-cycle above, the absolute fitness of a focal individual with trait $\ig$ (amount of contribution to local public good) can be written as
+
+\begin{multline}
+\aF(\ig) = \Ps'\Big[ (1-\pd) \Big( (1-\pc)\frac{\gs \cm}{(1-\pc)\gs\no\cm'} + \pc \frac{\gs\Ng(1-\bar{\Ps})\cm}{\pc\gs\no\Ng\bar{\Ps}\bar{\cm}} \Big) \\
+ + \pd \Big( (1-\pc)\frac{\gs \cm}{(1-\pc)\gs\no\cm'} + \pc \frac{\gs\Ng(1-\bar{\Ps})\cm}{\pc\gs\no\Ng\bar{\Ps}\bar{\cm}} \Big) \Big]
+\end{multline}
+where we wrote $\cm$ (resp.~$\cm'$, $\bar{\cm}$) as a shorthand for $\cm(\ig)$ (resp.~$\cm(\ig')$, $\cm(\bar{\ig})$). Absolute fitness simplifies to
+\begin{equation}
+\aF(\ig) = \Ps'\left( \frac{1-\bar{\Ps}\cm}{\no\bar{\Ps}\bar{\cm}} + \frac{\cm}{\no\cm'} \right).
+\end{equation}
+Since mean fitness is given by $\bar{\aF} = 1/\no$, relative fitness reads
+\begin{equation}
+\rF(\ig) = \frac{\aF(\ig)}{\bar{\aF}} = \frac{\Ps'\cm (\bar{\Ps}(\bar{\cm}-\cm')+\cm')}{\bar{\Ps}\bar{\cm}\cm'}.
+\end{equation}
+
+
+\section{Results}
+
+We first analyze a simple version of the model where the only evolving trait is the investment, $\ig$, in the local public good.
+
+
+\end{document}
